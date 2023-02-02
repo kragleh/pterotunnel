@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    PANEL: process.env.PANEL,
+    URL: process.env.URL,
     TOKEN: process.env.TOKEN
   }
 }

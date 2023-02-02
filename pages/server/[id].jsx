@@ -28,7 +28,7 @@ export default function ServerByID() {
     const host = results.data.attributes.sftp_details.ip
     const domain = document.getElementById('domain').value
     const port = document.getElementById('port').value
-    axios.post('http://localhost:3000/api/server/update', null, {
+    axios.post(`${process.env.URL}/api/server/update`, null, {
       headers: {
         "id": results.data.attributes.identifier,
         "containerhost": host,

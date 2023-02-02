@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { spawn } from 'child_process'
 
 export default function handler(req, res) {
 
@@ -40,6 +41,7 @@ export default function handler(req, res) {
           if (err) {
             return res.status(500).json({ error: 'Unable to edit file!' })
           } else {
+            spawn('systemctl restart nginx')
             return res.status(200).json({ message: 'File created!' })
           }
         })
@@ -63,6 +65,7 @@ export default function handler(req, res) {
               if (err) {
                 return res.status(500).json({ error: 'Unable to edit file!' })
               } else {
+                spawn('systemctl restart nginx')
                 return res.status(200).json({ message: 'File created!' })
               }
             });
