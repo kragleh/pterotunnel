@@ -31,7 +31,7 @@ export default async function handler(req, res) {
 
   const fileName = `/etc/nginx/sites-enabled/${id}.conf`
 
-  if (fs.exists(fileName)) {
+  if (fs.existsSync(fileName)) {
     fs.unlink(fileName, (err) => {
       if (err) {
         return res.status(500).json({ error: 'Unable to delete the file!' })

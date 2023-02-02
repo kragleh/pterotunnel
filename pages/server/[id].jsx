@@ -11,6 +11,7 @@ export default function ServerByID() {
   const { id } = router.query
   const [results, setResults] = useState(null)
   const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
@@ -25,9 +26,11 @@ export default function ServerByID() {
 
   function handleUpdate() {
     event.preventDefault()
+
     const host = results.data.attributes.sftp_details.ip
     const domain = document.getElementById('domain').value
     const port = document.getElementById('port').value
+
     axios.post(`${process.env.URL}/api/server/update`, null, {
       headers: {
         "id": results.data.attributes.identifier,
@@ -36,9 +39,10 @@ export default function ServerByID() {
         "port": port
       }
     }).then(result => {
-      console.log('Result: ' + result)
-      setResults(result)
+      console.log(result)
+      setMessage('Updated!')
     }).catch(err => setMessage('Error occured!'))
+
   }
 
   if (results) {
@@ -53,7 +57,8 @@ export default function ServerByID() {
             </div>
             <div className='relative w-full flex flex-col gap-4 bg-gray-600 rounded'>
               <h1 className="bg-gray-800 text-gray-300 p-4 rounded text-lg">Proxy Pass Settings</h1>
-              { message && <h1 className='mx-4 bg-red-500 text-white p-2 rounded border border-red-700'>{message}</h1> }
+              { error && <h1 className='mx-4 bg-red-500 text-white p-2 rounded border border-red-700'>{error}</h1> }
+              { message && <h1 className='mx-4 bg-green-500 text-white p-2 rounded border border-green-700'>{message}</h1> }
               <form className="flex items-center gap-4 m-4 mt-0">
                 <input type="text" name="domain" id="domain" className="w-full p-2 rounded text-black" placeholder="example.com" required/>
                 <select name="port" id="port" className='w-full p-2 rounded text-black' required>
@@ -80,7 +85,7 @@ export default function ServerByID() {
       <section className='w-full h-screen bg-gray-700'>
         <div className='max-w-5xl mx-auto p-4 flex flex-col gap-2'>
           <div className="my-4">
-            <h1 className="text-xl font-semibold">Loading ...</h1>
+            <h1 className="text-xl font-semibold text-white">Loading ...</h1>
           </div>
         </div>
       </section>
@@ -91,6 +96,6 @@ export default function ServerByID() {
 
 export async function getServerSideProps(context) {
   return {
-    props: {},
-  };
+    props: {}
+  }
 }
