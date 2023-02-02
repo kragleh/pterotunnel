@@ -1,15 +1,4 @@
-const fs = require('fs')
-
-fs.writeFile('/etc/nginx/sites-available/hello-word.txt', 'Hello world!', (err) => {
-  if (err) {
-    console.log('Error!')
-  } else {
-    console.log('Success!')
-  }
-})
-
 import fs from 'fs'
-import { headers } from 'next/headers'
 
 export default function handler(req, res) {
 
