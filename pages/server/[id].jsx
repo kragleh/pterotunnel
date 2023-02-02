@@ -5,7 +5,7 @@ import Header from '@/components/Header'
 import { getCookie } from 'cookies-next'
 import fs from 'fs'
 
-export default function ServerByID({ exists }) {
+export default function ServerByID() {
 
   const apikey = getCookie('apikey')
   const router = useRouter()
@@ -13,7 +13,7 @@ export default function ServerByID({ exists }) {
   const [results, setResults] = useState(null)
   const [message, setMessage] = useState(null)
   const [error, setError] = useState(null)
-  const fileName = `/etc/nginx/sites-enabled/${id}.conf`
+  const [exists, setExists] = useState(false)
 
   useEffect(() => {
     axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
@@ -24,6 +24,16 @@ export default function ServerByID({ exists }) {
       console.log(result)
       setResults(result)
     }).catch(err => router.push('/'))
+
+    axios.get(`${process.env.URL}/api/server/exists`, {
+      headers: {
+        "id": id
+      }
+    }).then((result) => {
+      setExists(true)
+    }).catch((err) => {
+      setExists(false)
+    })
   }, [])
 
   function handleUpdate() {
@@ -100,16 +110,8 @@ export default function ServerByID({ exists }) {
 
 }
 
-export async function getServerSideProps(ctx) {
-
-  const { params } = ctx
-  const { id } = params.id
-  const fileName = `/etc/nginx/sites-enabled/${id}.conf`
-  const exists = fs.existsSync(fileName)
-
+export async function getServerSideProps() {
   return {
-    props: {
-      exists
-    }
+    props: {}
   }
 }
