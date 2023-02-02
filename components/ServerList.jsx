@@ -3,6 +3,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
+import ServerCard from './ServerCard'
 
 const ServerList = () => {
 
@@ -28,13 +29,7 @@ const ServerList = () => {
           {
             results.data.data.map((server) => {
               return (
-                <Link href={ `/server/${server.attributes.identifier}` } key={results.data.data.indexOf(server)} className='relative h-20 w-full flex justify-between items-center bg-gray-600 hover:border border-gray-500 rounded overflow-hidden'>
-                  <div className='flex flex-col m-4'>
-                    <div className='text-lg text-gray-300'>{ server.attributes.name }</div>
-                    <div className='text-gray-300'>{ server.attributes.description }</div>
-                  </div>
-                  <div className='bg-gray-600 absolute right-0'><div className='bg-red-400 p-1 h-16 m-2 rounded-2xl'></div></div>
-                </Link>
+                <ServerCard key={results.data.data.indexOf(server)} id={server.attributes.identifier} name={server.attributes.name} description={server.attributes.description} />
               )
             })
           }
@@ -60,7 +55,7 @@ const ServerList = () => {
             <div className='bg-gray-500 animate-pulse p-2 px-24 rounded-2xl'></div>
             <div className='bg-gray-500 animate-pulse p-2 px-9 w-fit rounded-2xl'></div>
           </div>
-          <div className='bg-gray-600 absolute right-0'><div className='bg-yellow-400 p-1 h-16 m-2 rounded-2xl'></div></div>
+          <div className='bg-gray-600 absolute right-0'><div className='bg-red-400 p-1 h-16 m-2 rounded-2xl'></div></div>
         </div>
         <div className='relative h-20 w-full flex justify-between items-center bg-gray-600 rounded overflow-hidden'>
           <div className='flex flex-col gap-2 m-4'>

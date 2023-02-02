@@ -3,8 +3,9 @@ import axios from 'axios'
 import { useRouter } from "next/router"
 import Header from '@/components/Header'
 import { getCookie } from 'cookies-next'
+import fs from 'fs'
 
-export default function ServerByID() {
+export default function ServerByID({ exists }) {
 
   const apikey = getCookie('apikey')
   const router = useRouter()
@@ -12,6 +13,7 @@ export default function ServerByID() {
   const [results, setResults] = useState(null)
   const [message, setMessage] = useState(null)
   const [error, setError] = useState(null)
+  const fileName = `/etc/nginx/sites-enabled/${id}.conf`
 
   useEffect(() => {
     axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
@@ -51,9 +53,13 @@ export default function ServerByID() {
         <Header />
         <section className='w-full h-screen bg-gray-700'>
           <div className='max-w-5xl mx-auto p-4 flex flex-col gap-2'>
-            <div className="my-4">
-              <h1 className="text-xl text-white font-semibold">{ results.data.attributes.name }</h1>
-              <span className="text-lg text-gray-300">{ results.data.attributes.description }</span>
+            <div className="my-4 flex justify-between">
+              <div>
+                <h1 className="text-xl text-white font-semibold">{ results.data.attributes.name }</h1>
+                <span className="text-lg text-gray-300">{ results.data.attributes.description }</span>
+              </div>
+              { exists && <div className='bg-green-400 p-1 h-10 m-2 rounded-2xl'></div> }
+              { !exists && <div className='bg-red-400 p-1 h-10 m-2 rounded-2xl'></div> }
             </div>
             <div className='relative w-full flex flex-col gap-4 bg-gray-600 rounded'>
               <h1 className="bg-gray-800 text-gray-300 p-4 rounded text-lg">Proxy Pass Settings</h1>
@@ -94,8 +100,16 @@ export default function ServerByID() {
 
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(ctx) {
+
+  const { params } = ctx
+  const { id } = params.id
+  const fileName = `/etc/nginx/sites-enabled/${id}.conf`
+  const exists = fs.existsSync(fileName)
+
   return {
-    props: {}
+    props: {
+      exists
+    }
   }
 }
