@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const headers = req.headers
   const id = headers.id
   const host = headers.containerhost
-  const domain = headers.domain
+  var domain = headers.domain
   const port = headers.port
 
   if (id === null || typeof id === 'undefined') {
@@ -28,6 +28,20 @@ export default async function handler(req, res) {
   if (domain === null || typeof domain === 'undefined') {
     return res.status(400).json({ message: 'Domain is undefined!' })
   }
+
+  if (port > 65535) {
+    return res.status(400).json({ message: 'Invalid port!' })
+  }
+
+  if (domain.length > 255) {
+    return res.status(400).json({ message: 'Domain is too long!' })
+  }
+
+  if (domain.length < 5) {
+    return res.status(400).json({ message: 'Domain is too short!' })
+  }
+
+  domain = domain.replace('https://', '').replace('http://', '')
 
   const fileName = `/etc/nginx/sites-enabled/${id}.conf`
 

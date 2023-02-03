@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useRouter } from "next/router"
 import Header from '@/components/Header'
 import { getCookie } from 'cookies-next'
-import fs from 'fs'
 
 export default function ServerByID() {
 
@@ -72,7 +71,7 @@ export default function ServerByID() {
               { !exists && <div className='bg-red-400 p-1 h-10 m-2 rounded-2xl'></div> }
             </div>
             <div className='relative w-full flex flex-col gap-4 bg-gray-600 rounded'>
-              <h1 className="bg-gray-800 text-gray-300 p-4 rounded text-lg">Proxy Pass Settings</h1>
+              <h1 className="bg-gray-800 text-gray-300 p-4 rounded text-lg">Reverse Proxy Settings</h1>
               { error && <h1 className='mx-4 bg-red-500 text-white p-2 rounded border border-red-700'>{error}</h1> }
               { message && <h1 className='mx-4 bg-green-500 text-white p-2 rounded border border-green-700'>{message}</h1> }
               <form className="flex items-center gap-4 m-4 mt-0">
