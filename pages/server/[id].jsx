@@ -26,7 +26,8 @@ export default function ServerByID() {
 
     axios.get(`${process.env.URL}/api/server/exists`, {
       headers: {
-        "id": id
+        "id": id,
+        "apikey": apikey
       }
     }).then((result) => {
       setExists(true)

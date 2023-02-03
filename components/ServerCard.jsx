@@ -1,15 +1,18 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { getCookie } from 'cookies-next'
 
 const ServerCard = ({ id, name, description }) => {
 
   const [exists, setExists] = useState(false)
+  const apikey = getCookie('apikey')
 
   useEffect(() => {
     axios.get(`${process.env.URL}/api/server/exists`, {
       headers: {
-        "id": id
+        "id": id,
+        "apikey": apikey
       }
     }).then((result) => {
       setExists(true)
