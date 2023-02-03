@@ -36,9 +36,20 @@ npm install
 npm run build
 ```
 
-### Run The Website
+### Test The Website
 ```bash
 npm run start
 ```
 
+### Make It Run 24/7
+
+```bash
+npm install -g pm2
+
+pm2 start npm --name pterotunnel -- run start
+
+pm2 save
+
+pm2 startup
+```
 
