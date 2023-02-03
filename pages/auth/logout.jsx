@@ -12,6 +12,6 @@ export default function Logout() {
   }) 
 
   return (
-    <h1 className="text-center text-white font-semibold text-2xl">Are you sure?</h1>
+    <h1 className="text-center text-white font-semibold text-2xl">Loging Out</h1>
   )
 }

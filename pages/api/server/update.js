@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { spawn } from 'child_process'
+import axios from 'axios'
 
 export default async function handler(req, res) {
 
@@ -8,6 +9,7 @@ export default async function handler(req, res) {
   }
 
   const headers = req.headers
+  const apikey = headers.apikey
   const id = headers.id
   const host = headers.containerhost
   var domain = headers.domain
@@ -15,6 +17,29 @@ export default async function handler(req, res) {
 
   if (id === null || typeof id === 'undefined') {
     return res.status(400).json({ message: 'Id is undefined!' })
+  }
+
+  try {
+    const authed = await axios.get(`${process.env.PANEL}/api/client`, {
+      headers: {
+        "Authorization": `Bearer ${apikey}`
+      }
+    })
+
+    var validServer = false
+
+    authed.data.data.array.forEach(server => {
+      if (server.identifier === id) {
+        validServer = true
+      }
+    })
+
+    if (!validServer) {
+      return res.status(400).json({ message: 'Server doesnt exist!' })
+    }
+
+  } catch (err) {
+    return res.status(400).json({ message: 'Not authentificated!' })
   }
   
   if (host === null || typeof host === 'undefined') {

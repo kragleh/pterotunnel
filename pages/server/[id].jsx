@@ -47,12 +47,13 @@ export default function ServerByID() {
         "id": results.data.attributes.identifier,
         "containerhost": host,
         "domain": domain,
-        "port": port
+        "port": port,
+        "apikey": apikey
       }
     }).then(result => {
       console.log(result)
-      setMessage('Updated!')
-    }).catch(err => setMessage('Error occured!'))
+      setMessage(result.message)
+    }).catch(err => setError(err.message))
 
   }
 
