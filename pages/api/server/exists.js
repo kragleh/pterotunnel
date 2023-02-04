@@ -14,7 +14,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Id is undefined!' })
   }
 
+  if (apikey === null || typeof apikey === 'undefined') {
+    return res.status(400).json({ message: 'Unauthorized' })
+  }
+
   try {
+
     const authed = await axios.get(`${process.env.PANEL}/api/client`, {
       headers: {
         "Authorization": `Bearer ${apikey}`
@@ -23,7 +28,7 @@ export default async function handler(req, res) {
 
     var validServer = false
 
-    authed.data.data.array.forEach(server => {
+    authed.data.data.map(server => {
       if (server.identifier === id) {
         validServer = true
       }
