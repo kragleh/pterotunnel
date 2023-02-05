@@ -26,12 +26,10 @@ export default async function handler(req, res) {
       }
     })
 
-    var validServer = false
+    console.log(authed)
 
-    authed.data.data.map(server => {
-      if (server.identifier === id) {
-        validServer = true
-      }
+    var validServer = authed.data.data.some(server => {
+      return server.identifier === id
     })
 
     if (!validServer) {
@@ -47,7 +45,7 @@ export default async function handler(req, res) {
   if (fs.existsSync(fileName)) {
     return res.status(200).json({ message: 'Server is being proxied.' })
   } else {
-    return res.status(500).json({ error: 'Server isnt being proxied!' })
+    return res.status(400).json({ message: 'Server isnt being proxied!' })
   }
 
 }
