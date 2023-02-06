@@ -6,7 +6,7 @@ import { getCookie } from 'cookies-next'
 import { AiFillUnlock, AiFillLock } from 'react-icons/ai' 
 import ProxySettings from '@/components/ProxySettings'
 import { MdLink, MdLinkOff } from 'react-icons/md'
-import SSLSettings from '@/components/SSLSettings'
+import SecureProxySettings from '@/components/SecureProxySettings'
 import Footer from '@/components/Footer'
 
 export default function ServerByID() {
@@ -61,7 +61,7 @@ export default function ServerByID() {
             </div>
             <div className='grid grid-cols-2 px-8 gap-4'>
               <ProxySettings id={id} server={server} />
-              <SSLSettings id={id} />
+              <SecureProxySettings id={id} server={server} />
             </div>
           </div>
         </section>
