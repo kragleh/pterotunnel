@@ -1,5 +1,6 @@
 import axios from "axios"
 import fs from 'fs'
+import { spawn } from 'child_process'
 
 export default function (req, res) {
 
@@ -32,6 +33,7 @@ export default function (req, res) {
         return res.status(500).json({ message: 'Proxy wasnt deleted!' })
       }
 
+      spawn('systemctl', ['restart', 'nginx'])
       return res.status(200).json({ message: 'Proxy was deleted!' })
     })
 
