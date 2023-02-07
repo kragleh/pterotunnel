@@ -61,7 +61,6 @@ export default function ServerByID() {
             </div>
             <div className='grid grid-cols-2 px-8 gap-4'>
               <ProxySettings id={id} server={server} />
-              <SecureProxySettings id={id} server={server} />
             </div>
           </div>
         </section>
