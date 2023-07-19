@@ -17,11 +17,13 @@ export async function POST(request: Request, { params }: { params: { id: string 
   }
 
   try {
-    await axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
+    const res = await axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
       headers: {
         "Authorization": `Bearer ${apikey}`
       }
     })
+
+    const server = res.data.attributes
 
     const fileName = `/etc/nginx/sites-enabled/${id}.conf`
 

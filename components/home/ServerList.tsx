@@ -23,7 +23,7 @@ const ServerList = async () => {
     })
 
     return (
-      <section className='max-w-[1200px] xl:mx-auto mx-4 my-[4.5rem] flex flex-col gap-2'>
+      <section className='my-[3.5rem] flex flex-col gap-2'>
         {
           servers.map((server) => {
             return (

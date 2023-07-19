@@ -15,7 +15,7 @@ const ServerCard = async ({ server }: { server: Server }) => {
   } catch (ignored) {}
 
   return (
-    <Link href={ `/server/${ server.identifier }` }>
+    <Link href={ `/server/${ server.identifier }` } className='w-full'>
       <div className='bg-gray-600 rounded flex justify-between items-center hover:outline-gray-500 outline outline-1 outline-transparent duration-200'>
         <div className='flex gap-4 ml-4'>
           <div className='rounded-full bg-gray-500 p-2 my-auto'><AiFillUnlock size={24} className='text-gray-300' /></div>

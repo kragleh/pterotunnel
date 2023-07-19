@@ -23,4 +23,18 @@ export interface Server {
   };
   is_suspended: boolean;
   is_installing: boolean;
+  relationships: {
+    allocations: {
+      data: [
+        {
+          attributes: {
+            id: number;
+            ip: string;
+            port: number;
+            is_default: boolean;
+          }
+        }
+      ]
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import './globals.css'
 import { Metadata } from 'next'
+import Copyright from '../components/Copyright'
  
 export const metadata: Metadata = {
   title: 'Pterotunnel',
@@ -14,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        { children }
+      </body>
     </html>
   )
 }

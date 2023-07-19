@@ -23,7 +23,9 @@ const HomePage = async () => {
     return (
       <>
         <Header user={ user } />
-        <ServerList />
+        <main className='max-w-[1200px] mx-auto w-full p-4 flex flex-col gap-4'>
+          <ServerList />
+        </main>
         <Copyright />
       </>
     )
