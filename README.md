@@ -1,6 +1,9 @@
 # PteroTunnel 
 An nginx manager built using [Next.js](https://nextjs.org/) & [Tailwind CSS](https://tailwindcss.com/) that lets you easily reverse proxy your [Pterodactyl Panel](https://pterodactyl.io/) servers.
 
+# ATTENTION!
+This repository is for developement purposes only, you SHOULD NOT run this in any way without being ok with dataloss!
+
 ## Getting Started
 This project is in its early stages and shouldnt be used in production!
 
@@ -16,15 +19,22 @@ curl -Lo pterotunnel.tar.gz https://github.com/kragleh/pterotunnel/releases/late
 tar -xzvf pterotunnel.tar.gz
 ```
 
+## Install Node.JS 18
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install nodejs
+```
+
 ### Edit .env
 
 ```bash
+cp .env.example .env
 nano .env
 ```
 
-PANEL - Is your Pterodactyl Panel url `Ex: https://panel.yourdomain.xxx`
+PANEL - Is your Pterodactyl Panel url `Ex: https://panel.example.com`
 
-URL - Is the url you are accessing this website from `Ex: https://panel.yourdomain.xxx:25420`
+TUNNEL - Is the url you are accessing this website from `Ex: http://tunnel.example.com:3000`
 
 ### Install Required Node Modules
 ```bash
