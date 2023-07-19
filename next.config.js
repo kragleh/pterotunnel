@@ -1,8 +1,18 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
-  reactStrictMode: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.gravatar.com',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  },
   env: {
-    URL: process.env.URL,
+    TUNNEL: process.env.TUNNEL,
     PANEL: process.env.PANEL
   }
 }
