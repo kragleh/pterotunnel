@@ -8,9 +8,9 @@ export async function POST(request: Request, { params }: { params: { id: string 
   const id = params.id
   const apikey = cookies().get('apikey')?.value
   const headers = request.headers
-  const host = headers.get('host')
-  const port = headers.get('port')
-  const domain = headers.get('domain')
+  const host = headers.get('containerhost')
+  const port = headers.get('containerport')
+  const domain = headers.get('userdomain')
 
   if (!apikey || !host || !port || !domain) {
     return new NextResponse(JSON.stringify({ error: 'No variables found!' }), { status: 404 })
@@ -22,8 +22,6 @@ export async function POST(request: Request, { params }: { params: { id: string 
         "Authorization": `Bearer ${apikey}`
       }
     })
-
-    const server = res.data.attributes
 
     const fileName = `/etc/nginx/sites-enabled/${id}.conf`
 

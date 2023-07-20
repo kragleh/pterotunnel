@@ -15,9 +15,9 @@ const ProxySettings = ({ server }: { server: Server }) => {
 
     axios.post(`${process.env.tunnel}/api/proxy/${server.identifier}/update`, null, {
       headers: {
-        'host': host,
-        'port': port,
-        'domain': domain
+        'containerhost': host,
+        'containerport': port,
+        'userdomain': domain
       }
     }).then(() => {
       alert('Proxy updated!')
