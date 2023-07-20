@@ -11,7 +11,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
   const host = headers.get('containerhost')
   const port = headers.get('containerport')
   const domain = headers.get('userdomain')
-  const cert = headers.get('certificate')
+  const cert = headers.get('certificatecert')
   const key = headers.get('certificatekey')
 
   if (!apikey || !host || !port || !domain || !cert || !key) {
