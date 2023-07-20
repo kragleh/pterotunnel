@@ -33,14 +33,13 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
     }).catch((err) => {
       alert(err)
     })
-
   }
 
   const onDelete = () => {
     axios.delete(`${process.env.tunnel}/api/proxy/${server.identifier}/delete`).then(() => {
       alert('Secure proxy deleted!')
-    }).catch(() => {
-      alert('Something went wrong!')
+    }).catch((err) => {
+      alert(err)
     })
   }
 

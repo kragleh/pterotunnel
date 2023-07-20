@@ -21,8 +21,8 @@ const ProxySettings = ({ server }: { server: Server }) => {
       }
     }).then(() => {
       alert('Proxy updated!')
-    }).catch(() => {
-      alert('Something went wrong!')
+    }).catch((err) => {
+      alert(err)
     })
 
   }
@@ -30,8 +30,8 @@ const ProxySettings = ({ server }: { server: Server }) => {
   const onDelete = () => {
     axios.delete(`${process.env.tunnel}/api/proxy/${server.identifier}/delete`).then(() => {
       alert('Proxy deleted!')
-    }).catch(() => {
-      alert('Something went wrong!')
+    }).catch((err) => {
+      alert(err)
     })
   }
 
