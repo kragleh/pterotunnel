@@ -31,8 +31,8 @@ export async function POST(request: Request, { params }: { params: { id: string 
     const dirName = `/var/www/pterotunnel/ssl/${id}`
 
     await fs.promises.mkdir(dirName)
-    await fs.promises.writeFile(certName, cert)
-    await fs.promises.writeFile(keyName, key)
+    await fs.promises.writeFile(certName, cert.toString())
+    await fs.promises.writeFile(keyName, key.toString())
 
     if (fs.existsSync(proxyName)) {
       await fs.promises.unlink(proxyName)
