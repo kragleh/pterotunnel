@@ -19,7 +19,7 @@ cd /var/www/pterotunnel
 ### Install The Latest Release
 ```bash
 curl -Lo pterotunnel.zip https://github.com/kragleh/pterotunnel/releases/latest/download/pterotunnel.zip
-tar -xzvf pterotunnel.zip
+unzip pterotunnel.zip
 ```
 
 ### Edit .env
