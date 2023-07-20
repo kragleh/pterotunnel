@@ -7,25 +7,25 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
 
   const onProxy = () => {
     const portElement = document.getElementById('port') as HTMLSelectElement
-    const domainElement = document.getElementById('domain') as HTMLInputElement
-    const certificateCertElement = document.getElementById('certificatecert') as HTMLTextAreaElement
-    const certificateKeyElement = document.getElementById('certificatekey') as HTMLTextAreaElement
+    const domainElement = document.getElementById('userdomain') as HTMLInputElement
+    const certElement = document.getElementById('cert') as HTMLTextAreaElement
+    const certKeyElement = document.getElementById('certKey') as HTMLTextAreaElement
     const select = portElement.value.split(';')
     const host = select[0]
     const port = select[1]
     const domain = domainElement.value
-    const cert = certificateCertElement.value
-    const key = certificateKeyElement.value
+    const cert = certElement.value
+    const certKey = certKeyElement.value
 
     const formData = new FormData()
-    formData.append('certificatecert', cert)
-    formData.append('certificatekey', key)
+    formData.append('userdomain', domain)
+    formData.append('cert', cert)
+    formData.append('certKey', certKey)
 
     axios.post(`${process.env.tunnel}/api/proxy/${server.identifier}/secure/update`, formData, {
       headers: {
         'containerhost': host,
         'containerport': port,
-        'userdomain': domain,
         'Content-Type': 'multipart/form-data',
       }
     }).then(() => {
@@ -59,12 +59,12 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
             })
           }
         </select>
-        <label htmlFor="domain" className='text-xs text-white'>DOMAIN</label>
-        <input type="text" name="domain" id="domain" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200' />
-        <label htmlFor="certificatecert" className='text-xs text-white'>SSL CERTIFICATE</label>
-        <textarea name="certificatecert" id="certificatecert" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
-        <label htmlFor="certificatekey" className='text-xs text-white'>SSL KEY</label>
-        <textarea name="certificatekey" id="certificatekey" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
+        <label htmlFor="userdomain" className='text-xs text-white'>DOMAIN</label>
+        <input type="text" name="userdomain" id="userdomain" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200' />
+        <label htmlFor="cert" className='text-xs text-white'>SSL CERTIFICATE</label>
+        <textarea name="cert" id="cert" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
+        <label htmlFor="certKey" className='text-xs text-white'>SSL KEY</label>
+        <textarea name="certKey" id="certKey" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
         <div className='grid grid-cols-2 gap-2'>
           <button onClick={ onProxy } className='text-sm text-white text-center bg-blue-500 hover:bg-blue-600 border-blue-700 border rounded p-3 uppercase duration-200'>
             SECURE PROXY

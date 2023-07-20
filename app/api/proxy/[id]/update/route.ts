@@ -31,7 +31,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
       await fs.promises.copyFile('./templates/proxy.conf', fileName)
 
       var content = await fs.promises.readFile(fileName, { encoding: 'utf-8' })
-      const edited = content.replace('%domain%', domain).replace('%host%', host).replace('%port%', port)
+      const edited = content.replaceAll('%domain%', domain).replaceAll('%host%', host).replaceAll('%port%', port)
       
       await fs.promises.writeFile(fileName, edited)
       
@@ -42,7 +42,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
       await fs.promises.copyFile('./templates/proxy.conf', fileName)
 
       var content = await fs.promises.readFile(fileName, { encoding: 'utf-8' })
-      const edited = content.replace('%domain%', domain).replace('%host%', host).replace('%port%', port)
+      const edited = content.replaceAll('%domain%', domain).replaceAll('%host%', host).replaceAll('%port%', port)
       
       await fs.promises.writeFile(fileName, edited)
       
