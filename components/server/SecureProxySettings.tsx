@@ -17,18 +17,21 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
     const cert = certificateCertElement.value
     const key = certificateKeyElement.value
 
-    axios.post(`${process.env.tunnel}/api/proxy/${server.identifier}/secure/update`, null, {
+    const formData = new FormData()
+    formData.append('certificatecert', cert)
+    formData.append('certificatekey', key)
+
+    axios.post(`${process.env.tunnel}/api/proxy/${server.identifier}/secure/update`, formData, {
       headers: {
         'containerhost': host,
         'containerport': port,
         'userdomain': domain,
-        'certificatecert': cert,
-        'certificatekey': key
+        'Content-Type': 'multipart/form-data',
       }
     }).then(() => {
       alert('Secure proxy updated!')
-    }).catch(() => {
-      alert('Something went wrong!')
+    }).catch((err) => {
+      alert(err)
     })
 
   }

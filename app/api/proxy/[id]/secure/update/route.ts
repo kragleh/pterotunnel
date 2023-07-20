@@ -11,8 +11,8 @@ export async function POST(request: Request, { params }: { params: { id: string 
   const host = headers.get('containerhost')
   const port = headers.get('containerport')
   const domain = headers.get('userdomain')
-  const cert = headers.get('certificatecert')
-  const key = headers.get('certificatekey')
+  const cert = (await request.formData()).get('certificatecert')
+  const key = (await request.formData()).get('certificatekey')
 
   if (!apikey || !host || !port || !domain || !cert || !key) {
     return new NextResponse(JSON.stringify({ error: 'No variables found!' }), { status: 404 })
