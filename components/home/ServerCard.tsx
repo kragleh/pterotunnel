@@ -7,11 +7,8 @@ import axios from 'axios'
 const ServerCard = async ({ server }: { server: Server }) => {
   var exists = false
   try {
-    var res = await axios.get(`${process.env.tunnel}/api/proxy/${server.identifier}/exists`)
-  
-    if (res.status === 200) {
-      exists = true
-    }
+    await axios.get(`${process.env.tunnel}/api/proxy/${server.identifier}/exists`)
+    exists = true
   } catch (ignored) {}
 
   return (
