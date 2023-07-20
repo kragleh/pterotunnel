@@ -27,7 +27,7 @@ const ServerList = async () => {
         {
           servers.map((server) => {
             return (
-              <ServerCard server={ server } />
+              <ServerCard key={ server.identifier } server={ server } />
             )
           })
         }
