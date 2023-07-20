@@ -41,7 +41,16 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
       return new NextResponse(JSON.stringify({ message: 'Server is proxied!' }), { status: 200 })
     } else {
-      return new NextResponse(JSON.stringify({ message: 'Server is not proxied!' }), { status: 400 })
+      await fs.promises.copyFile('./templates/proxy.conf', fileName)
+
+      var content = await fs.promises.readFile(fileName, { encoding: 'utf-8' })
+      const edited = content.replace('%domain%', domain).replace('%host%', host).replace('%port%', port)
+      
+      await fs.promises.writeFile(fileName, edited)
+      
+      await exec('systemctl restart nginx')
+
+      return new NextResponse(JSON.stringify({ message: 'Server is proxied!' }), { status: 200 })
     }
 
   } catch (err) {

@@ -15,8 +15,8 @@ cd /var/www/pterotunnel
 
 ### Install The Latest Release
 ```bash
-curl -Lo pterotunnel.tar.gz https://github.com/kragleh/pterotunnel/releases/latest/download/pterotunnel.tar.gz
-tar -xzvf pterotunnel.tar.gz
+curl -Lo pterotunnel.zip https://github.com/kragleh/pterotunnel/releases/download/0.1-Recode-v2/pterotunnel.zip
+unzip pterotunnel.zip
 ```
 
 ## Install Node.JS 18
