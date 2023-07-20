@@ -14,9 +14,9 @@ const Header = ({ user }: { user: User }) => {
           PteroTunnel
         </Link>
         <div className='flex items-center h-14'>
-          <HeaderButton href={ process.env.PANEL ? process.env.PANEL : '/' } icon={ <FaHome size={16} /> } />
+          <HeaderButton href={ process.env.panel ? process.env.panel : '/' } icon={ <FaHome size={16} /> } />
           <HeaderButton href={ '/' } icon={ <FaLayerGroup size={16} /> } />
-          <HeaderButton href={ process.env.PANEL ? process.env.PANEL + '/account' : '/' } icon={ 
+          <HeaderButton href={ process.env.panel ? process.env.panel + '/account' : '/' } icon={ 
             <Image alt='PFP' src={ `https://www.gravatar.com/avatar/` + MD5(user.email) } height={20} width={20} className='rounded-full' /> 
           } />
           <HeaderButton href={ '/auth/logout' } icon={ <FaSignOutAlt size={16} /> } />

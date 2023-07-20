@@ -12,8 +12,8 @@ const nextConfig = {
     ],
   },
   env: {
-    TUNNEL: process.env.TUNNEL,
-    PANEL: process.env.PANEL
+    tunnel: process.env.tunnel,
+    panel: process.env.panel
   }
 }
 

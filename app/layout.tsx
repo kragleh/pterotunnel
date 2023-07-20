@@ -1,6 +1,5 @@
 import './globals.css'
 import { Metadata } from 'next'
-import Copyright from '../components/Copyright'
  
 export const metadata: Metadata = {
   title: 'Pterotunnel',

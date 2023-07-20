@@ -13,7 +13,7 @@ const ProxySettings = ({ server }: { server: Server }) => {
     const port = select[1]
     const domain = domainElement.value
 
-    axios.post(`${process.env.TUNNEL}/api/proxy/${server.identifier}/update`, null, {
+    axios.post(`${process.env.tunnel}/api/proxy/${server.identifier}/update`, null, {
       headers: {
         'host': host,
         'port': port,
@@ -28,7 +28,7 @@ const ProxySettings = ({ server }: { server: Server }) => {
   }
 
   const onDelete = () => {
-    axios.delete(`${process.env.TUNNEL}/api/proxy/${server.identifier}/delete`).then(() => {
+    axios.delete(`${process.env.tunnel}/api/proxy/${server.identifier}/delete`).then(() => {
       alert('Proxy deleted!')
     }).catch(() => {
       alert('Something went wrong!')

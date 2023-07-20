@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 
   try {
-    await axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
+    await axios.get(`${process.env.panel}/api/client/servers/${id}`, {
       headers: {
         "Authorization": `Bearer ${apikey}`
       }
@@ -27,6 +27,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     }
 
   } catch (err) {
+    console.error(err)
     return new NextResponse(JSON.stringify({ error: 'Something went wrong!' }), { status: 500 })
   }
 }

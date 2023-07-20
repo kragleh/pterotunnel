@@ -13,7 +13,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
   }
 
   try {
-    await axios.get(`${process.env.PANEL}/api/client/servers/${id}`, {
+    await axios.get(`${process.env.panel}/api/client/servers/${id}`, {
       headers: {
         "Authorization": `Bearer ${apikey}`
       }
@@ -27,6 +27,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
     return new NextResponse(JSON.stringify({ message: 'Proxy deleted and Nginx restarted!' }), { status: 200 });
   } catch (err) {
+    console.error(err)
     return new NextResponse(JSON.stringify({ error: 'Something went wrong!' }), { status: 500 })
   }
 }
