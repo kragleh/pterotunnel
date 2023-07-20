@@ -6,6 +6,7 @@ import Copyright from '../../../components/Copyright'
 import Header from '../../../components/header/Header'
 import ServerCard from '../../../components/home/ServerCard'
 import ProxySettings from '../../../components/server/ProxySettings'
+import SecureProxySettings from '../../../components/server/SecureProxySettings'
 import { Server } from '../../../lib/Server'
 import { User } from '../../../lib/User'
 
@@ -38,6 +39,7 @@ const ServerPage = async ({ params }: { params: { id: string } }) => {
           </div>
           <div className='grid grid-cols-2 gap-8'>
             <ProxySettings server={ server } />
+            <SecureProxySettings server={ server } />
           </div>
           <Copyright />
         </main>
