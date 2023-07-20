@@ -8,19 +8,25 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
   const onProxy = () => {
     const portElement = document.getElementById('port') as HTMLSelectElement
     const domainElement = document.getElementById('domain') as HTMLInputElement
+    const certificateElement = document.getElementById('certificate') as HTMLTextAreaElement
+    const certificateKeyElement = document.getElementById('certificatekey') as HTMLTextAreaElement
     const select = portElement.value.split(';')
     const host = select[0]
     const port = select[1]
     const domain = domainElement.value
+    const cert = certificateElement.value
+    const key = certificateKeyElement.value
 
     axios.post(`${process.env.tunnel}/api/proxy/${server.identifier}/update`, null, {
       headers: {
         'containerhost': host,
         'containerport': port,
-        'userdomain': domain
+        'userdomain': domain,
+        'certificate': cert,
+        'certificatekey': key
       }
     }).then(() => {
-      alert('Proxy updated!')
+      alert('Secure proxy updated!')
     }).catch(() => {
       alert('Something went wrong!')
     })
@@ -29,7 +35,7 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
 
   const onDelete = () => {
     axios.delete(`${process.env.tunnel}/api/proxy/${server.identifier}/delete`).then(() => {
-      alert('Proxy deleted!')
+      alert('Secure proxy deleted!')
     }).catch(() => {
       alert('Something went wrong!')
     })
@@ -39,10 +45,24 @@ const SecureProxySettings = ({ server }: { server: Server }) => {
     <section className='bg-gray-600 rounded'>
       <h1 className='bg-gray-800 rounded text-white uppercase p-3 text-sm'>SECURE PROXY SETTINGS</h1>
       <div className='p-3 flex flex-col gap-2'>
+        <label htmlFor="port" className='text-xs text-white'>PORT</label>
+        <select name="port" id="port" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'>
+          {
+            server.relationships.allocations.data.map((obj) => {
+              return (
+                <option key={ obj.attributes.id } value={ obj.attributes.ip + ';' + obj.attributes.port }>
+                  { obj.attributes.port }
+                </option>
+              )
+            })
+          }
+        </select>
+        <label htmlFor="domain" className='text-xs text-white'>DOMAIN</label>
+        <input type="text" name="domain" id="domain" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200' />
         <label htmlFor="certificate" className='text-xs text-white'>SSL CERTIFICATE</label>
         <textarea name="certificate" id="certificate" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
-        <label htmlFor="key" className='text-xs text-white'>SSL KEY</label>
-        <textarea name="key" id="key" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
+        <label htmlFor="certificatekey" className='text-xs text-white'>SSL KEY</label>
+        <textarea name="certificatekey" id="certificatekey" className='bg-gray-500 p-3 text-gray-300 text-sm rounded border-2 border-gray-400/50 hover:border-gray-400 duration-200'></textarea>
         <div className='grid grid-cols-2 gap-2'>
           <button onClick={ onProxy } className='text-sm text-white text-center bg-blue-500 hover:bg-blue-600 border-blue-700 border rounded p-3 uppercase duration-200'>
             SECURE PROXY
