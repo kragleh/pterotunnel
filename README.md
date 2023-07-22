@@ -19,7 +19,7 @@ cd /var/www/pterotunnel
 ### Install The Latest Release
 ```bash
 curl -Lo pterotunnel.zip https://github.com/kragleh/pterotunnel/releases/latest/download/pterotunnel.zip
-tar -xzvf pterotunnel.zip
+unzip pterotunnel.zip
 ```
 
 ### Edit .env
@@ -59,7 +59,7 @@ pm2 startup
 
 ### Setup Nginx Reverse Proxy For HTTPS
 ```bash
-nano /etc/nginx/enabled-sites/pterotunnel.conf
+nano /etc/nginx/sites-enabled/pterotunnel.conf
 ```
 
 Paste this below to the nginx configuration file and replace `%domain%` with your domain
